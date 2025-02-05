@@ -1,43 +1,56 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
 
-const url = "mongodb+srv://reddappareddy18:JUQHJzKDD8r5LZXr@myfirsttproject.lei10.mongodb.net/?retryWrites=true&w=majority&appName=myfirsttproject";
+const url =
+  "mongodb+srv://namastedev:ECXK5j0d4OuHZhs6@namastenode.rc211ms.mongodb.net/";
 
-// Connection URL
 const client = new MongoClient(url);
 
-// Database Name
-const dbName = 'firstdatabase';
+const dbName = "HelloWorld";
 
 async function main() {
-    // Use connect method to connect to the server
-    await client.connect();
-    console.log('Connected successfully to server');
-    const db = client.db(dbName);
-    const collection = db.collection('user');
+  await client.connect();
+  console.log("Connected successfully to server");
+  const db = client.db(dbName);
+  const collection = db.collection("User");
 
-    // the following code examples can be pasted here...
+  const data = {
+    firstname: "Ranveer",
+    lastname: "Singh",
+    city: "Mumbai",
+    phoneNumber: "987543210",
+  };
 
-    // Insert the data
-    
-    const data = {
-        firstname: "raju",
-        secondname: "malluri",
-        phonenumber: "1234567889",
-        city: "bangalore"
-    }
+  const insertResult = await collection.insertOne(data);
+  console.log("Inserted documents =>", insertResult);
 
-    const insertResult = await collection.insertMany([data]);
-    console.log('Inserted documents =>', insertResult);
+  // Read
+  const findResult = await collection.find({}).toArray();
+  console.log("Found documents =>", findResult);
 
-    //Read the data from database
+  const countResult = await collection.countDocuments({});
+  console.log("Count of documents in the User collection =>", countResult);
 
-    const findResult = await collection.find({}).toArray();
-    console.log('Found documents =>', findResult);
+  // Find all documents with a filter of firstname: Deepika
 
-    return 'done.';
+  const result = await collection.find({ firstname: "Deepika" }).count();
+  console.log("result => ", result);
+
+  return "done.";
 }
 
 main()
-    .then(console.log)
-    .catch(console.error)
-    .finally(() => client.close());
+  .then(console.log)
+  .catch(console.error)
+  .finally(() => client.close());
+
+// NOTES
+
+// Go to mongodb website
+// Create a free M0 cluster
+// Create a user
+// Get the connection string
+// Install Mongo DB compass
+// Create a database
+// INstall mongodb package
+// Create a connection from code
+// Documents CRUD - CReate, REad, Update, Delete
