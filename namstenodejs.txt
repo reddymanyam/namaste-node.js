@@ -1,0 +1,5 @@
+// first we want to plan the product that we are going to built
+// plan with designer team for the better understanding
+// monolith vs microservices architecture 
+// HLD && LLD planning
+// LLD --------------> DataBase plannig(db) and API plannig
